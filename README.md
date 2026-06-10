@@ -39,28 +39,30 @@ You said the edition is free / unknown. Two things to know:
 
 ## Install on the Windows PC
 
-Needs Python 3.10+. Pick one:
+Repo: <https://github.com/david-morgenstern/hwinfo-mcp> · prebuilt assets on the [Releases page](https://github.com/david-morgenstern/hwinfo-mcp/releases/latest).
 
-### A. pip (simplest)
+### A. pip straight from GitHub (needs Python 3.10+) — simplest
+```powershell
+pip install "git+https://github.com/david-morgenstern/hwinfo-mcp"
+```
+Installs a `hwinfo-mcp` command.
+
+### B. Standalone .exe — no Python needed
+Download `hwinfo-mcp.exe` from the [latest release](https://github.com/david-morgenstern/hwinfo-mcp/releases/latest) and put it anywhere, e.g. `C:\Tools\hwinfo-mcp.exe`.
+
+### C. pip from a downloaded wheel
+Download `hwinfo_mcp-*.whl` from the release, then:
+```powershell
+pip install hwinfo_mcp-0.1.0-py3-none-any.whl
+```
+
+### D. From a local checkout
 ```powershell
 cd hwinfo-mcp
-pip install .
-```
-This installs a `hwinfo-mcp` command.
-
-### B. pipx (isolated)
-```powershell
-pipx install .
+pip install .        # or: pipx install .
 ```
 
-### C. Single-file .exe (no Python needed at runtime)
-```powershell
-cd hwinfo-mcp
-pip install .[build]
-pyinstaller --onefile --name hwinfo-mcp --paths src ^
-  --collect-all mcp src\hwinfo_mcp\__main__.py
-```
-The exe lands in `dist\hwinfo-mcp.exe`. (`--collect-all mcp` ensures the MCP SDK's data files are bundled.)
+> The release `.exe` is produced by the `release` GitHub Actions workflow (it also builds the wheel/sdist). Cut a new release by pushing a tag: `git tag v0.1.1 && git push origin v0.1.1`.
 
 ## Register with Claude Code
 
