@@ -36,7 +36,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install . pyinstaller
+      # mcp[cli] pulls in typer, which PyInstaller's `--collect-all mcp` imports
+      # during analysis (mcp.cli). Without it the build aborts.
+      - run: pip install . "mcp[cli]" pyinstaller
       - run: >
           pyinstaller --onefile --name hwinfo-mcp --paths src
           --collect-all mcp src/hwinfo_mcp/__main__.py
