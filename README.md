@@ -14,7 +14,7 @@ It runs **on the Windows machine** (where HWiNFO and the hardware live) and talk
 
 | Data | Source |
 |------|--------|
-| Live sensors | HWiNFO **Shared Memory v2** (`Global\HWiNFO_SENS_SM2`), read with stdlib `mmap` — no native deps |
+| Live sensors | HWiNFO **Shared Memory v2** (`Global\HWiNFO_SENS_SM2`), opened read-only through the Win32 mapping API via Python's stdlib `ctypes` |
 | Memory timings / full report | HWiNFO **report file**: tries `HWiNFO64.exe -j<file>` (JSON), falls back to a manually-saved report |
 
 Memory timings are *static config* data, so they only appear in HWiNFO **reports**, not in the live shared-memory sensor stream — hence the two paths.
